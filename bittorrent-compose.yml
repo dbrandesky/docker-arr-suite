@@ -40,18 +40,3 @@ networks:
     name: media_network
     driver: bridge
     attachable: true
-
-volumes:
-  torrent: # torrent data mount
-    driver: local
-    driver_opts:
-      type: "nfs"
-      o: "addr=${NFS_SERVER},rw,tcp,nolock,hard,wsize=65536,rsize=65536"
-      device: ":${NFS_VOLUME}/data/torrents"
-
-  bittorrent: # qBittorrent app data.
-    driver: local
-    driver_opts:
-      type: "nfs"
-      o: "addr=${NFS_SERVER},rw,tcp,nolock,hard,wsize=65536,rsize=65536"
-      device: ":${NFS_VOLUME}/docker_data/bittorrent"

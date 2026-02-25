@@ -62,25 +62,3 @@ networks:
     name: media_network
     driver: bridge
     attachable: true
-
-volumes:
-  media: # Media library
-    driver: local
-    driver_opts:
-      type: "nfs"
-      o: "addr=${NFS_SERVER},rw,tcp,nolock,hard,wsize=65536,rsize=65536"
-      device: ":${NFS_VOLUME}/data/media"
-
-  overseerr: # Overseerr app data.
-    driver: local
-    driver_opts:
-      type: "nfs"
-      o: "addr=${NFS_SERVER},rw,tcp,nolock,hard,wsize=65536,rsize=65536"
-      device: ":${NFS_VOLUME}/docker_data/overseerr"
-
-  plex: # Plex app data.
-    driver: local
-    driver_opts:
-      type: "nfs"
-      o: "addr=${NFS_SERVER},rw,tcp,nolock,hard,wsize=65536,rsize=65536"
-      device: ":${NFS_VOLUME}/docker_data/plex"
