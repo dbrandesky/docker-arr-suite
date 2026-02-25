@@ -50,10 +50,12 @@ sudo sysctl -p
 5. Configure UFW firewall
 Allow SSH, WireGuard, and your torrent port (example: 50000):
 ```
+sudo ufw default allow routed
 sudo ufw allow 22/tcp
 sudo ufw allow 51820/udp
 sudo ufw allow 50000/tcp
 sudo ufw allow 50000/udp
+sudo ufw allow 53
 sudo ufw enable
 ```
 

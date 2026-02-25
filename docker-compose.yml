@@ -26,7 +26,7 @@ services:
 
   gluetun:
     # See more: https://github.com/qdm12/gluetun-wiki
-    image: qmcgaw/gluetun
+    image: qmcgaw/gluetun:v3
     container_name: gluetun
     restart: always
     cap_add:
