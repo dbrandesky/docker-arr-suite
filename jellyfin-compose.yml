@@ -9,9 +9,9 @@ services:
     # Network mode of 'host' exposes the ports on the host. This is needed for DLNA access.
     # network_mode: 'host'
     volumes:
-      - jellyfin:/config
-      - cache:/cache
-      - media:/media
+      - ./jellyfin:/config
+      - ./cache:/cache
+      - ./media:/media
     env_file: ./env/jellyfin.env
     labels:
       - traefik.enable=true
@@ -29,7 +29,7 @@ services:
     restart: always
     env_file: ./env/jellyfin.env
     volumes:
-      - jellyseerr:/app/config
+      - ./jellyseerr:/app/config
     labels:
       - traefik.enable=true
       - traefik.http.routers.jellyseerr.rule=Host(`jellyseerr.${DOMAIN}`)

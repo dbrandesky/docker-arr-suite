@@ -15,8 +15,8 @@ services:
     network_mode: service:gluetun
     env_file: ./env/arr.env
     volumes:
-      - sonarr:/config
-      - data:/media
+      - ./sonarr:/config
+      - ./data:/media
     healthcheck:
       test: curl -f http://localhost:8989/ping || exit 1
       interval: 10s
@@ -47,8 +47,8 @@ services:
     network_mode: service:gluetun
     env_file: ./env/arr.env
     volumes:
-      - radarr:/config
-      - data:/media
+      - ./radarr:/config
+      - ./data:/media
     healthcheck:
       test: curl -f http://localhost:7878/ping || exit 1
       interval: 10s
@@ -78,8 +78,8 @@ services:
     network_mode: service:gluetun
     env_file: ./env/arr.env
     volumes: 
-      - prowlarr:/config
-      - data:/media
+      - ./prowlarr:/config
+      - ./data:/media
     healthcheck:
       test: curl -f http://localhost:9696/ping || exit 1
       interval: 10s
@@ -117,8 +117,8 @@ services:
       - sonarr-api
     env_file: ./env/arr.env
     volumes:
-      - data:/media
-      - unpackerr:/config
+      - ./data:/media
+      - ./unpackerr:/config
     depends_on:
       sonarr:
         condition: service_healthy

@@ -35,7 +35,7 @@ services:
       - /dev/net/tun:/dev/net/tun
     env_file: ./env/gluetun.env
     volumes:
-      - gluetun:/gluetun
+      - ./gluetun:/gluetun
     ports:
       - "50000:50000/tcp"
       - "50000:50000/udp"

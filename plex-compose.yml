@@ -12,7 +12,7 @@ services:
     restart: always
     env_file: ./env/plex.env
     volumes:
-      - overseerr:/app/config
+      - ./overseerr:/app/config
     healthcheck:
       test: wget http://localhost:5055/api/v1/status -qO /dev/null || exit 1
       interval: 10s
@@ -40,8 +40,8 @@ services:
       - plex-claim
     env_file: ./env/plex.env
     volumes:
-      - plex:/config
-      - media:/media
+      - ./plex:/config
+      - ./media:/media
     healthcheck:
       test: curl -f http://localhost:32400/identity || exit 1
       interval: 10s
