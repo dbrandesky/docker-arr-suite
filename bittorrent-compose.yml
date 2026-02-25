@@ -12,7 +12,7 @@ services:
     image: lscr.io/linuxserver/qbittorrent:latest
     container_name: bittorrent
     restart: always
-    network_mode: service:gluetun
+    network_mode: "service:gluetun"
     env_file: ./env/bittorrent.env
     volumes:
       - bittorrent:/config
@@ -32,20 +32,6 @@ services:
         condition: service_healthy
         restart: true
       traefik:
-        condition: service_healthy
-        restart: true
-
-  bittorrent_port_forwarder:
-    # See more: https://github.com/mjmeli/qbittorrent-port-forward-gluetun-server
-    image: mjmeli/qbittorrent-port-forward-gluetun-server
-    container_name: bittorrent_port_forwarder
-    restart: always
-    secrets:
-      - bittorrent-user
-      - bittorrent-password
-    env_file: ./env/bittorrent.env
-    depends_on:
-      bittorrent:
         condition: service_healthy
         restart: true
 
