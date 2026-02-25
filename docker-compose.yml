@@ -14,15 +14,15 @@ services:
       - "8080:80"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-  healthcheck:
-    test: netstat -ptan | grep -E "80.*LISTEN" || exit 1
-    interval: 10s
-    timeout: 3s
-    start_period: 60s
-    labels:
-      - "traefik.http.routers.dashboard.rule=Host(`traefik.local`)"
-      - "traefik.http.routers.dashboard.service=api@internal"
-      - "traefik.http.routers.dashboard.entrypoints=web"
+    healthcheck:
+      test: netstat -ptan | grep -E "80.*LISTEN" || exit 1
+      interval: 10s
+      timeout: 3s
+      start_period: 60s
+      labels:
+        - "traefik.http.routers.dashboard.rule=Host(`traefik.local`)"
+        - "traefik.http.routers.dashboard.service=api@internal"
+        - "traefik.http.routers.dashboard.entrypoints=web"
 
   gluetun:
     # See more: https://github.com/qdm12/gluetun-wiki
