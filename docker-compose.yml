@@ -47,7 +47,7 @@ services:
     image: scuzza/gluetun-webui:latest
     container_name: gluetun-webui
     ports:
-      - 3000:3000
+      - 8079:3000
     environment:
       - GLUETUN_CONTROL_URL=http://gluetun:8000
       # Uncomment if Gluetun auth is enabled:
