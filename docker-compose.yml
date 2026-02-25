@@ -10,6 +10,9 @@ services:
       - --providers.docker=true
       # Set up an insecure listener which can be used behind caddy
       - --entrypoints.web.address=:80
+        # Enable insecure access to the dashboard
+      - --api.insecure=true
+      - --api.dashboard=true
     ports:
       - "8080:80"
     volumes:
@@ -39,6 +42,34 @@ services:
     ports:
       - "50000:50000/tcp"
       - "50000:50000/udp"
+
+  gluetun-webui:
+    image: scuzza/gluetun-webui:latest
+    container_name: gluetun-webui
+    ports:
+      - 3000:3000
+    environment:
+      - GLUETUN_CONTROL_URL=http://gluetun:8000
+      # Uncomment if Gluetun auth is enabled:
+      #- GLUETUN_API_KEY=yourtoken
+      #- GLUETUN_USER=username
+      #- GLUETUN_PASSWORD=password
+    networks:
+      - media_network
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    healthcheck:
+      test: [ "CMD", "wget", "-qO-", "http://localhost:3000/api/health" ]
+      interval: 30s
+      timeout: 5s
+      start_period: 10s
+      retries: 3
 
 include:
   - bittorrent-compose.yml
