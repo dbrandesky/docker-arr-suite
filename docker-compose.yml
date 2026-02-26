@@ -16,6 +16,7 @@ services:
     ports:
       - "50000:50000/tcp"
       - "50000:50000/udp"
+      - "8088:8088/tcp"
 
   gluetun-webui:
     image: scuzza/gluetun-webui:latest
