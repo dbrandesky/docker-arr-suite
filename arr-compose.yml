@@ -22,16 +22,10 @@ services:
       interval: 10s
       timeout: 3s
       start_period: 60s
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.sonarr.rule=Host(`sonarr.${DOMAIN}`)
-      - traefik.http.routers.sonarr.entrypoints=websecure
-      - traefik.http.services.sonarr.loadbalancer.server.port=8989
+    ports:
+      - 8989:8989
     depends_on:
       gluetun:
-        condition: service_healthy
-        restart: true
-      traefik:
         condition: service_healthy
         restart: true
       bittorrent:
@@ -54,16 +48,10 @@ services:
       interval: 10s
       timeout: 3s
       start_period: 60s
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.radarr.rule=Host(`radarr.${DOMAIN}`)
-      - traefik.http.routers.radarr.entrypoints=websecure
-      - traefik.http.services.radarr.loadbalancer.server.port=7878
+    ports:
+      - 7878:7878
     depends_on:
       gluetun:
-        condition: service_healthy
-        restart: true
-      traefik:
         condition: service_healthy
         restart: true
       bittorrent:
@@ -85,16 +73,10 @@ services:
       interval: 10s
       timeout: 3s
       start_period: 60s
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.prowlarr.rule=Host(`prowlarr.${DOMAIN}`)
-      - traefik.http.routers.prowlarr.entrypoints=websecure
-      - traefik.http.services.prowlarr.loadbalancer.server.port=9696
+    ports:
+      - 9696:9696
     depends_on:
       gluetun:
-        condition: service_healthy
-        restart: true
-      traefik:
         condition: service_healthy
         restart: true
       bittorrent:

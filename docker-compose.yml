@@ -1,32 +1,6 @@
 ---
 
 services:
-  traefik:
-    image: traefik
-    container_name: traefik
-    restart: always
-    command:
-      - --log.level=DEBUG
-      - --providers.docker=true
-      # Set up an insecure listener which can be used behind caddy
-      - --entrypoints.web.address=:80
-        # Enable insecure access to the dashboard
-      - --api.insecure=true
-      - --api.dashboard=true
-    ports:
-      - "8080:80"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-    healthcheck:
-      test: netstat -ptan | grep -E "80.*LISTEN" || exit 1
-      interval: 10s
-      timeout: 3s
-      start_period: 60s
-    labels:
-      - "traefik.http.routers.dashboard.rule=Host(`traefik.local`)"
-      - "traefik.http.routers.dashboard.service=api@internal"
-      - "traefik.http.routers.dashboard.entrypoints=web"
-
   gluetun:
     # See more: https://github.com/qdm12/gluetun-wiki
     image: qmcgaw/gluetun:v3

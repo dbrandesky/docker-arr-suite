@@ -18,15 +18,9 @@ services:
       interval: 10s
       timeout: 3s
       start_period: 60s
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.overseerr.rule=Host(`overseerr.${DOMAIN}`)
-      - traefik.http.routers.overseerr.entrypoints=websecure
-      - traefik.http.services.overseerr.loadbalancer.server.port=5055
+    ports:
+      - 5055:5055
     depends_on:
-      traefik:
-        condition: service_healthy
-        restart: true
       plex:
         condition: service_healthy
         restart: true
@@ -47,15 +41,8 @@ services:
       interval: 10s
       timeout: 3s
       start_period: 60s
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.plex.rule=Host(`plex.${DOMAIN}`)
-      - traefik.http.routers.plex.entrypoints=websecure
-      - traefik.http.services.plex.loadbalancer.server.port=32400
-    depends_on:
-      traefik:
-        condition: service_healthy
-        restart: true
+    ports:
+      - 32400:32400
 
 networks:
   default:
