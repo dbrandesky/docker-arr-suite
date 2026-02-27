@@ -17,7 +17,9 @@ services:
       - "50000:50000/tcp"
       - "50000:50000/udp"
       - "8088:8088/tcp"
-
+      - "8989:8989/tcp"
+      - "7878:7878/tcp"
+      - "9696:9696/tcp"
   gluetun-webui:
     image: scuzza/gluetun-webui:latest
     container_name: gluetun-webui
